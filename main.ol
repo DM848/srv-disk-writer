@@ -2,7 +2,7 @@ include "console.iol"
 include "srv-disk-writer.iol"
 
 
-execution {sequential}
+execution {sequential}  //concurrnet?
 
 inputPort input{
     Location: "socket://localhost:8020/"
@@ -23,12 +23,12 @@ main
         
         
         //write user program to google cloud persistant storage
-        writeFile@File({.content = request.program, .filename = request.filename})();
+        writeFile@File({.content = request.program, .filename = "/data/" + request.filename})();
         
         response = "finished"
     }]
     
     [getProgram(token)(response){
-        response = "i don't know"
+        readFile@File( { .filename = "/data/" + token + ".ol" } )( response )
         }]
 }
