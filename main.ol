@@ -34,7 +34,7 @@ main
         }]
         
     [deleteProgram(token)(answer){
-        println@Console("Deleting file: " + )();
+        println@Console("Deleting file: " + token)();
         delete@File("/data/" + token + ".ol")();
         answer = "deleted file"
         }]
